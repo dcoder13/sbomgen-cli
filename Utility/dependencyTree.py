@@ -9,7 +9,7 @@ def DependencyTree(sbom, path):
         return
     with open(os.path.join(path, "depTree.txt"), "w", encoding="utf-8") as file:
         for dependency in dependencies:
-            file.write(f"├── {dependency['ref']}\n")
+            file.write(f"├── {dependency['ref'] if 'ref' in dependency.keys() else dependency['bom-ref']}\n")
             for sub in dependency["dependsOn"]:
                 file.write(f"│   ├── {sub}\n")
             file.write("\n")
